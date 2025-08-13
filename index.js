@@ -1,11 +1,18 @@
-const express = require("express")
+const express = require("express");
+const morgan = require("morgan");
 
 const app = express();
 const PORT = 3000;
 
+// Custom morgan format: method, url, status, IP, response time
+morgan.token("ip", (req) => req.ip);
+
+app.use(
+  morgan(":method :url :status :ip - :response-time ms")
+);
+
 app.get("/", (req, res) => {
-  const now = new Date();
-  res.send(`Hello World! Current date and time: ${now}`);
+  res.send(`Hello World! Current date and time: ${new Date()}`);
 });
 
 app.listen(PORT, () => {
