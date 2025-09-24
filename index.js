@@ -15,6 +15,10 @@ app.get("/", (req, res) => {
   res.send(`Hello World! Current date and time: ${new Date()}`);
 });
 
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on: ${PORT}`);
 });
